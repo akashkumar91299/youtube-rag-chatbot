@@ -12,9 +12,16 @@ def create_chunks(transcript: str): # Convert transcript into LangChain document
     )
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=200,
-    )
+    chunk_size=800,
+    chunk_overlap=150,
+    separators=[
+        "\n\n",
+        "\n",
+        ". ",
+        " ",
+        ""
+    ]
+)
 
     chunks = splitter.split_documents([document])
 
