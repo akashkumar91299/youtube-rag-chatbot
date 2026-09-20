@@ -5,6 +5,7 @@ from src.vector_store import create_vector_store
 from src.retriever import create_retriever
 from src.prompt import get_rag_prompt
 from src.llm import get_llm
+from src.reranker import Reranker
 
 
 class YouTubeRAG:
@@ -12,6 +13,7 @@ class YouTubeRAG:
     def __init__(self):
         self.embeddings = get_embeddings()
         self.llm = get_llm()
+        self.reranker = Reranker()
 
         self.vector_store = None
         self.retriever = None
@@ -24,12 +26,14 @@ class YouTubeRAG:
 
         self.vector_store = create_vector_store( chunks, self.embeddings )
 
-        self.retriever = create_retriever( self.vector_store, k=4)
+        self.retriever = create_retriever( self.vector_store, k=20)
 
-        return { "transcript": transcript, "chunks": chunks,
+        return { 
+                "transcript": transcript,
+                "chunks": chunks,
         }
 
-    def ask(self, question: str):
+    def ask(self, question: str):# Return the best documents
        
         if self.retriever is None:
             raise ValueError(
@@ -38,11 +42,17 @@ class YouTubeRAG:
 
         # Retrieve relevant chunks
         retrieved_docs = self.retriever.invoke( question)
+        
+        reranked_docs = self.reranker.rerank(
+            query = question,
+            documents=retrieved_docs,
+            top_k=4
+            )
 
         # Combine retrieved documents
         context = "\n\n".join(
             doc.page_content
-            for doc in retrieved_docs
+            for doc in reranked_docs
         )
 
         # Create prompt

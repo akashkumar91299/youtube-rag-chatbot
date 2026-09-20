@@ -9,4 +9,6 @@ langchain-text-splitters
 faiss-cpu
 sentence-transformers
 transformers
-huggingface-hubkr d
+huggingface-hub
+torch
+torchvision

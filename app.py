@@ -43,33 +43,6 @@ with st.sidebar:
         use_container_width=True
     )
 
-    st.divider()
-
-    st.subheader("RAG Settings")
-
-    st.write("Embedding Model")
-
-    st.code(
-        "all-MiniLM-L6-v2",
-        language="text"
-    )
-
-    st.write("Vector Database")
-
-    st.code(
-        "FAISS",
-        language="text"
-    )
-
-    st.write("Retriever")
-
-    st.code(
-        "Similarity Search (k=4)",
-        language="text"
-    )
-
-    st.divider()
-
     if st.button(
         "Clear Chat",
         use_container_width=True
@@ -122,12 +95,9 @@ if st.session_state.video_loaded:
     st.success(
         "✅ Video is ready. Ask your question below."
     )
-
 else:
-
     st.info(
-        "👈 Enter a YouTube URL and click  load video"
-        
+        "👈 Enter a YouTube URL and click  load video"    
     )
 
 # Display Chat History
@@ -147,40 +117,30 @@ for message in st.session_state.messages:
 question = st.chat_input(
     "Ask something about the video..."
 )
-
 # Process Question
-
 if question:
-
     if not st.session_state.video_loaded:
-
         st.warning(
             "Please load a YouTube video first."
         )
-
     else:
-
         # Display user question
-
         st.session_state.messages.append(
             {
                 "role": "user",
                 "content": question
             }
         )
-
         with st.chat_message("user"):
 
             st.markdown(question)
-
         # Generate answer
-
         with st.chat_message("assistant"):
-
+            
             with st.spinner("Thinking..."):
-
+                
                 try:
-
+                    
                     result = (
                         st.session_state.rag
                         .ask(question)
