@@ -112,19 +112,17 @@ for message in st.session_state.messages:
             message["content"]
         )
 
-# Chat Input
-
 question = st.chat_input(
     "Ask something about the video..."
 )
-# Process Question
+
 if question:
     if not st.session_state.video_loaded:
         st.warning(
             "Please load a YouTube video first."
         )
     else:
-        # Display user question
+    
         st.session_state.messages.append(
             {
                 "role": "user",
@@ -134,7 +132,7 @@ if question:
         with st.chat_message("user"):
 
             st.markdown(question)
-        # Generate answer
+
         with st.chat_message("assistant"):
             
             with st.spinner("Thinking..."):
@@ -151,7 +149,6 @@ if question:
 
                     st.markdown(answer)
 
-                    # Sources
 
                     with st.expander(
                         "Retrieved Sources"
@@ -172,7 +169,6 @@ if question:
 
                             st.divider()
 
-                    # Save assistant response
 
                     st.session_state.messages.append(
                         {

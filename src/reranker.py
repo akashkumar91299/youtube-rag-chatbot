@@ -12,15 +12,12 @@ class Reranker:
         
         pairs  = [(query,document.page_content) for document in documents]
         
-        # Calculate relevance scores
         scores = self.model.predict(pairs)
         
         documents_scored = list(zip(documents,scores))
         
-        # Sort from highest relevance to lowest
         documents_scored.sort(key=lambda x: x[1],reverse=True)
         
-        # Return the best documents
         return [
             document
             for document,score in documents_scored[:top_k]

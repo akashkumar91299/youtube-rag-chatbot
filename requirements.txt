@@ -1,6 +1,5 @@
 streamlit
 python-dotenv
-youtube-transcript-api
 langchain
 langchain-community
 langchain-core
@@ -12,3 +11,4 @@ transformers
 huggingface-hub
 torch
 torchvision
+requests

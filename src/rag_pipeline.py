@@ -40,7 +40,6 @@ class YouTubeRAG:
                 "Please load a YouTube video first."
             )
 
-        # Retrieve relevant chunks
         retrieved_docs = self.retriever.invoke( question)
         
         reranked_docs = self.reranker.rerank(
@@ -49,13 +48,11 @@ class YouTubeRAG:
             top_k=4
             )
 
-        # Combine retrieved documents
         context = "\n\n".join(
             doc.page_content
             for doc in reranked_docs
         )
 
-        # Create prompt
         prompt = get_rag_prompt()
 
         formatted_prompt = prompt.format(
@@ -63,7 +60,6 @@ class YouTubeRAG:
             question=question
         )
 
-        # Generate answer
         response = self.llm.invoke(
             formatted_prompt
         )
