@@ -68,6 +68,18 @@ youtube-rag-chatbot/
 └── requirement.txt
 ```
 
+Live Demo:
+[https://youtube-rag-chatbot-c.streamlit.app/]
+
+Tech Stack:
+Python
+Streamlit
+LangChain
+FAISS
+Sentence Transformers
+Hugging Face
+YTranscript API
+
 ## File Description
 
 | File                | Description                              |
@@ -117,7 +129,7 @@ source venv/bin/activate
 ### 3. Install dependencies
 
 ```bash
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 ## Environment Variables
@@ -146,26 +158,6 @@ The application will open in your browser.
 
 Enter a YouTube Video ID and ask questions about the video's content.
 
-## Example Questions
-
-You can ask questions such as:
-
-```text
-What is the main topic of this video?
-```
-
-```text
-Explain the main concepts discussed in the video.
-```
-
-```text
-What are the key points mentioned by the speaker?
-```
-
-The system retrieves relevant transcript content and provides it to the LLM as context for generating the answer.
-
-## Current Version
-
 ### v1.0 — Basic RAG
 
 This version implements a complete basic RAG pipeline:
@@ -180,41 +172,6 @@ This version implements a complete basic RAG pipeline:
 * LLM-based response generation
 
 The current version focuses on building a functional end-to-end RAG system.
-
-## Future Improvements
-
-Advanced RAG techniques will be added in future versions, including:
-
-* Improved chunking strategies
-* Metadata-based retrieval
-* Query transformation
-* Query rewriting
-* Reranking
-* Hybrid search
-* Context compression
-* Retrieval evaluation
-* Response evaluation
-* Conversation memory
-
-## Development Roadmap
-
-```text
-Basic RAG
-    ↓
-Improved Chunking
-    ↓
-Metadata & Better Retrieval
-    ↓
-Reranking
-    ↓
-Query Transformation
-    ↓
-Hybrid Search
-    ↓
-RAG Evaluation
-    ↓
-Advanced RAG
-```
 
 ## Project Goal
 
